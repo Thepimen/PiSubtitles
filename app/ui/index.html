@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PiSubtitles Studio - Subtítulos Automáticos con IA</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="dark-theme">
+  <!-- Fondo con gradientes y efecto glassmorphism -->
+  <div class="ambient-glow glow-top-left"></div>
+  <div class="ambient-glow glow-bottom-right"></div>
+  <div class="ambient-glow glow-center"></div>
+
+  <!-- Contenedor Principal de la Aplicación -->
+  <div class="app-layout">
+    
+    <!-- ENCABEZADO -->
+    <header class="app-header">
+      <div class="header-brand">
+        <div class="brand-logo">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+            <path d="M8 9h8"></path>
+            <path d="M8 13h5"></path>
+          </svg>
+        </div>
+        <div class="brand-text">
+          <h1>PiSubtitles <span class="badge-pro">STUDIO</span></h1>
+          <p class="brand-tagline">Subtítulos automáticos con IA para Creadores de Contenido</p>
+        </div>
+      </div>
+
+      <div class="header-actions">
+        <div class="status-chip" id="hwChip" title="Aceleración de cómputo detectada">
+          <span class="status-dot"></span>
+          <span id="hwLabel">Detectando hardware...</span>
+        </div>
+      </div>
+    </header>
+
+    <!-- CUERPO PRINCIPAL -->
+    <main class="app-main">
+      
+      <!-- SECCIÓN SUPERIOR: CARGA Y CONFIGURACIÓN -->
+      <section class="top-dashboard">
+        
+        <!-- ZONA DE CARGA (DRAG & DROP) -->
+        <div class="card glass-card drop-section" id="dropSection">
+          <div class="drop-zone" id="dropZone">
+            <input type="file" id="fileInput" accept="audio/*,video/*" class="file-input-hidden">
+            
+            <div class="drop-idle-content" id="dropIdleContent">
+              <div class="drop-icon-wrapper">
+                <svg width="38" height="38" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                  <polyline points="17 8 12 3 7 8"></polyline>
+                  <line x1="12" y1="3" x2="12" y2="15"></line>
+                </svg>
+              </div>
+              <h3 class="drop-title">Arrastra y suelta tu archivo aquí</h3>
+              <p class="drop-subtitle">Soporta MP4, MP3, WAV, MKV, MOV, M4A, WEBM y más</p>
+              <div class="drop-buttons">
+                <button type="button" class="btn btn-secondary btn-glow" id="btnBrowse">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path>
+                  </svg>
+                  <span>Explorar Archivo</span>
+                </button>
+                <button type="button" class="btn btn-ghost btn-sm" id="btnLoadSample" title="Cargar archivo de muestra">
+                  <span>Probar muestra</span>
+                </button>
+              </div>
+            </div>
+
+            <!-- VISTA DE ARCHIVO CARGADO -->
+            <div class="drop-active-file" id="dropActiveFile" style="display: none;">
+              <div class="file-preview-card">
+                <div class="file-icon-badge" id="fileExtBadge">MP3</div>
+                <div class="file-info-details">
+                  <h4 class="file-name-text" id="fileNameText">audio.mp3</h4>
+                  <div class="file-meta-row">
+                    <span class="meta-tag" id="fileSizeText">0 MB</span>
+                    <span class="meta-divider">•</span>
+                    <span class="meta-tag" id="fileDurationText">00:00</span>
+                    <span class="meta-divider">•</span>
+                    <span class="meta-tag tag-ready">Listo para transcribir</span>
+                  </div>
+                </div>
+                <div class="file-actions">
+                  <button type="button" class="btn-icon" id="btnChangeFile" title="Cambiar archivo">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                      <polyline points="1 4 1 10 7 10"></polyline>
+                      <polyline points="23 20 23 14 17 14"></polyline>
+                      <path d="M20.49 9A9 9 0 0 0 5.64 5.64L1 10m22 4l-4.64 4.36A9 9 0 0 1 3.51 15"></path>
+                    </svg>
+                  </button>
+                  <button type="button" class="btn-icon btn-icon-danger" id="btnRemoveFile" title="Quitar archivo">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                      <line x1="18" y1="6" x2="6" y2="18"></line>
+                      <line x1="6" y1="6" x2="18" y2="18"></line>
+                    </svg>
+                  </button>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- PANEL DE OPCIONES DE TRANSCRIPCIÓN -->
+        <div class="card glass-card config-section">
+          <div class="card-header">
+            <h2 class="card-title">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="3"></circle>
+                <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
+              </svg>
+              <span>Ajustes de IA</span>
+            </h2>
+          </div>
+
+          <div class="config-grid">
+            <!-- Selector de Idioma -->
+            <div class="form-group">
+              <label for="selectLanguage" class="form-label">Idioma</label>
+              <div class="custom-select-wrapper">
+                <select id="selectLanguage" class="custom-select">
+                  <option value="auto">🌐 Detección Automática</option>
+                  <option value="es" selected>🇪🇸 Español</option>
+                  <option value="en">🇬🇧 English</option>
+                  <option value="fr">🇫🇷 Français</option>
+                  <option value="de">🇩🇪 Deutsch</option>
+                  <option value="it">🇮🇹 Italiano</option>
+                  <option value="pt">🇵🇹 Português</option>
+                  <option value="ca">Català</option>
+                  <option value="gl">Galego</option>
+                  <option value="eu">Euskara</option>
+                  <option value="ja">🇯🇵 日本語</option>
+                  <option value="zh">🇨🇳 中文</option>
+                </select>
+              </div>
+            </div>
+
+            <!-- Selector de Modelo Whisper -->
+            <div class="form-group">
+              <label for="selectModel" class="form-label">Modelo Whisper</label>
+              <div class="custom-select-wrapper">
+                <select id="selectModel" class="custom-select">
+                  <option value="tiny">Tiny (Ultra rápido, ~39M)</option>
+                  <option value="base">Base (Rápido y ligero, ~74M)</option>
+                  <option value="small" selected>Small (Recomendado, ~244M)</option>
+                  <option value="medium">Medium (Máxima precisión, ~769M)</option>
+                </select>
+              </div>
+            </div>
+
+            <!-- Modo de Segmentación -->
+            <div class="form-group full-width">
+              <div class="mode-toggle-header">
+                <label class="form-label">Modo de Segmentación</label>
+                <div class="mode-tabs">
+                  <button type="button" class="mode-tab active" id="tabModeWords" data-mode="words">Shorts / Reels</button>
+                  <button type="button" class="mode-tab" id="tabModeSentence" data-mode="sentence">Frases Naturales</button>
+                </div>
+              </div>
+
+              <!-- Control deslizante de palabras por línea (Modo Creadores) -->
+              <div class="words-control-box" id="wordsControlBox">
+                <div class="slider-header">
+                  <span class="slider-caption">Máximo de palabras por línea:</span>
+                  <span class="slider-val-badge" id="sliderValBadge">4 palabras</span>
+                </div>
+                <div class="slider-row">
+                  <input type="range" id="wordsSlider" min="1" max="10" value="4" class="custom-slider">
+                  <div class="preset-chips">
+                    <button type="button" class="chip-btn" data-val="3">3</button>
+                    <button type="button" class="chip-btn active" data-val="4">4</button>
+                    <button type="button" class="chip-btn" data-val="5">5</button>
+                    <button type="button" class="chip-btn" data-val="6">6</button>
+                  </div>
+                </div>
+                <p class="slider-hint">💡 Ideal para subtítulos dinámicos estilo MrBeast, Alex Hormozi o TikTok.</p>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- BOTÓN DE ACCIÓN PRINCIPAL -->
+          <div class="action-footer">
+            <button type="button" class="btn btn-primary btn-generate" id="btnStartTranscribe" disabled>
+              <div class="btn-content">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                  <polygon points="5 3 19 12 5 21 5 3"></polygon>
+                </svg>
+                <span>Generar Subtítulos</span>
+              </div>
+              <div class="btn-shimmer"></div>
+            </button>
+            <button type="button" class="btn btn-danger btn-cancel" id="btnCancelTranscribe" style="display: none;">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+              </svg>
+              <span>Cancelar</span>
+            </button>
+          </div>
+
+        </div>
+
+      </section>
+
+      <!-- BARRA DE PROGRESO Y VISOR EN VIVO DE TRANSCRIPCIÓN -->
+      <section class="progress-section" id="progressSection" style="display: none;">
+        <div class="card glass-card progress-card">
+          <div class="progress-header">
+            <div class="progress-title-wrap">
+              <div class="spinner-pulse"></div>
+              <span class="progress-title" id="progressStatusText">Transcribiendo audio...</span>
+            </div>
+            <span class="progress-percentage" id="progressPercentageText">0%</span>
+          </div>
+
+          <div class="progress-bar-container">
+            <div class="progress-bar-fill" id="progressBarFill" style="width: 0%;">
+              <div class="progress-shimmer"></div>
+            </div>
+          </div>
+
+          <!-- Ticker / Visor de frases en vivo -->
+          <div class="live-ticker">
+            <span class="ticker-label">EN VIVO:</span>
+            <span class="ticker-text" id="liveTickerText">Esperando primer segmento de voz...</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- SECCIÓN DEL EDITOR Y PREVISUALIZADOR INTEGRADO -->
+      <section class="editor-section" id="editorSection">
+        
+        <div class="card glass-card editor-card">
+          
+          <!-- BARRA DE REPRODUCCIÓN DE AUDIO SINCRONIZADA -->
+          <div class="audio-player-bar" id="audioPlayerBar">
+            <audio id="mainAudioElement" preload="auto"></audio>
+
+            <div class="player-controls">
+              <button type="button" class="player-btn-play" id="btnPlayerPlay" title="Reproducir/Pausar (Espacio)">
+                <svg id="iconPlay" width="22" height="22" viewBox="0 0 24 24" fill="currentColor">
+                  <polygon points="5 3 19 12 5 21 5 3"></polygon>
+                </svg>
+                <svg id="iconPause" width="22" height="22" viewBox="0 0 24 24" fill="currentColor" style="display: none;">
+                  <rect x="6" y="4" width="4" height="16"></rect>
+                  <rect x="14" y="4" width="4" height="16"></rect>
+                </svg>
+              </button>
+
+              <div class="player-time-display">
+                <span id="playerCurrentTime">00:00</span>
+                <span class="time-sep">/</span>
+                <span id="playerTotalTime">00:00</span>
+              </div>
+            </div>
+
+            <!-- Scrubber / Línea de tiempo -->
+            <div class="player-timeline-wrapper">
+              <div class="timeline-bar" id="timelineBar">
+                <div class="timeline-fill" id="timelineFill" style="width: 0%;"></div>
+                <div class="timeline-thumb" id="timelineThumb"></div>
+              </div>
+            </div>
+
+            <div class="player-options">
+              <button type="button" class="btn-ghost btn-sm speed-btn" id="btnPlaybackSpeed">1.0x</button>
+            </div>
+          </div>
+
+          <!-- BARRA DE HERRAMIENTAS Y EXPORTACIÓN -->
+          <div class="editor-toolbar">
+            <div class="toolbar-left">
+              <div class="stats-badge">
+                <span id="subtitlesCountText">0 subtítulos</span>
+                <span class="meta-divider">•</span>
+                <span id="wordsCountText">0 palabras</span>
+              </div>
+              <div class="search-box">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <circle cx="11" cy="11" r="8"></circle>
+                  <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                </svg>
+                <input type="text" id="searchInput" placeholder="Buscar en subtítulos..." class="search-input">
+              </div>
+            </div>
+
+            <div class="toolbar-right">
+              <button type="button" class="btn btn-secondary btn-sm" id="btnAddSubtitleRow" title="Añadir nueva fila">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <line x1="12" y1="5" x2="12" y2="19"></line>
+                  <line x1="5" y1="12" x2="19" y2="12"></line>
+                </svg>
+                <span>Añadir</span>
+              </button>
+
+              <div class="export-dropdown-group">
+                <button type="button" class="btn btn-primary btn-sm btn-glow" id="btnExportSRT">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                    <polyline points="7 10 12 15 17 10"></polyline>
+                    <line x1="12" y1="15" x2="12" y2="3"></line>
+                  </svg>
+                  <span>Exportar .SRT</span>
+                </button>
+                <button type="button" class="btn btn-secondary btn-sm" id="btnExportVTT">.VTT</button>
+                <button type="button" class="btn btn-secondary btn-sm" id="btnExportTXT">.TXT</button>
+                <button type="button" class="btn btn-ghost btn-sm" id="btnCopyClipboard" title="Copiar texto al portapapeles">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                    <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                  </svg>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- TABLA / LISTA DE SUBTÍTULOS -->
+          <div class="subtitles-table-container">
+            <div class="subtitles-list" id="subtitlesList">
+              <!-- Estado vacío cuando aún no hay subtítulos -->
+              <div class="subtitles-empty" id="subtitlesEmpty">
+                <div class="empty-icon-wrap">
+                  <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                    <polyline points="14 2 14 8 20 8"></polyline>
+                    <line x1="16" y1="13" x2="8" y2="13"></line>
+                    <line x1="16" y1="17" x2="8" y2="17"></line>
+                    <polyline points="10 9 9 9 8 9"></polyline>
+                  </svg>
+                </div>
+                <h4>Tu transcripción aparecerá aquí</h4>
+                <p>Carga un archivo de audio o vídeo y haz clic en "Generar Subtítulos" para comenzar.</p>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+      </section>
+
+    </main>
+
+    <!-- PIE DE PÁGINA -->
+    <footer class="app-footer">
+      <span>PiSubtitles Studio • Motor de Transcripción Faster-Whisper</span>
+      <span class="footer-sep">•</span>
+      <span id="detectedLangBadge">Auto</span>
+      <span class="footer-sep">•</span>
+      <span>Código Abierto MIT</span>
+    </footer>
+
+  </div>
+
+  <!-- CONTENEDOR DE NOTIFICACIONES TOAST -->
+  <div class="toast-container" id="toastContainer"></div>
+
+  <!-- SCRIPTS -->
+  <script src="js/app.js"></script>
+</body>
+</html>
