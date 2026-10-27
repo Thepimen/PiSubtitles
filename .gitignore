@@ -45,6 +45,8 @@ pisubtitles_uploads/
 # Archivos de prueba generados
 test_output/
 *.subtitles.bak
+*.log
+release_dist/
 
 # Archivos del Sistema Operativo
 Thumbs.db

@@ -1,0 +1,202 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="100%" height="100%">
+  <defs>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#06080d" />
+      <stop offset="50%" stop-color="#0b101b" />
+      <stop offset="100%" stop-color="#07090e" />
+    </linearGradient>
+    <linearGradient id="accentGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#6366f1" />
+      <stop offset="50%" stop-color="#8b5cf6" />
+      <stop offset="100%" stop-color="#06b6d4" />
+    </linearGradient>
+    <linearGradient id="cardGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#131b2e" stop-opacity="0.9" />
+      <stop offset="100%" stop-color="#0d1322" stop-opacity="0.95" />
+    </linearGradient>
+    <linearGradient id="phoneScreen" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1e1b4b" />
+      <stop offset="50%" stop-color="#0f172a" />
+      <stop offset="100%" stop-color="#090d16" />
+    </linearGradient>
+    <radialGradient id="glowPurple" cx="25%" cy="25%" r="45%">
+      <stop offset="0%" stop-color="#6366f1" stop-opacity="0.22" />
+      <stop offset="100%" stop-color="#6366f1" stop-opacity="0" />
+    </radialGradient>
+    <radialGradient id="glowCyan" cx="80%" cy="75%" r="45%">
+      <stop offset="0%" stop-color="#06b6d4" stop-opacity="0.18" />
+      <stop offset="100%" stop-color="#06b6d4" stop-opacity="0" />
+    </radialGradient>
+  </defs>
+
+  <!-- Main Background -->
+  <rect width="1200" height="630" rx="18" fill="url(#bgGrad)" />
+  <rect width="1200" height="630" rx="18" fill="url(#glowPurple)" />
+  <rect width="1200" height="630" rx="18" fill="url(#glowCyan)" />
+  <rect x="1" y="1" width="1198" height="628" rx="17" fill="none" stroke="#1e293b" stroke-width="2" />
+
+  <!-- Top Window Titlebar -->
+  <rect x="24" y="20" width="1152" height="48" rx="12" fill="#0f172a" stroke="#1e293b" stroke-width="1.5" />
+  <circle cx="48" cy="44" r="6" fill="#ef4444" />
+  <circle cx="68" cy="44" r="6" fill="#f59e0b" />
+  <circle cx="88" cy="44" r="6" fill="#10b981" />
+
+  <!-- Brand in Titlebar -->
+  <rect x="114" y="31" width="26" height="26" rx="7" fill="url(#accentGrad)" />
+  <text x="127" y="49" font-family="Segoe UI, Inter, system-ui, sans-serif" font-size="15" font-weight="800" fill="#ffffff" text-anchor="middle">π</text>
+  <text x="150" y="49" font-family="Segoe UI, Inter, system-ui, sans-serif" font-size="15" font-weight="700" fill="#f8fafc">PiSubtitles Studio</text>
+  <rect x="292" y="34" width="46" height="20" rx="10" fill="#1e1b4b" stroke="#6366f1" stroke-width="1" />
+  <text x="315" y="48" font-family="Segoe UI, Inter, system-ui, sans-serif" font-size="11" font-weight="700" fill="#818cf8" text-anchor="middle">v2.0</text>
+
+  <!-- Hardware & Status Pills -->
+  <rect x="860" y="32" width="145" height="24" rx="12" fill="#064e3b" stroke="#10b981" stroke-width="1" />
+  <circle cx="876" cy="44" r="4" fill="#34d399" />
+  <text x="938" y="48" font-family="Segoe UI, Inter, system-ui, sans-serif" font-size="11" font-weight="600" fill="#a7f3d0" text-anchor="middle">Faster-Whisper IA</text>
+
+  <rect x="1015" y="32" width="145" height="24" rx="12" fill="#1e293b" stroke="#334155" stroke-width="1" />
+  <text x="1087" y="48" font-family="Segoe UI, Inter, system-ui, sans-serif" font-size="11" font-weight="600" fill="#cbd5e1" text-anchor="middle">CUDA / CPU int8</text>
+
+  <!-- LEFT PANEL: AI Configuration & Presets -->
+  <rect x="24" y="82" width="290" height="524" rx="14" fill="url(#cardGrad)" stroke="#1e293b" stroke-width="1.5" />
+  <text x="44" y="114" font-family="Segoe UI, Inter, system-ui, sans-serif" font-size="13" font-weight="700" fill="#94a3b8" letter-spacing="0.8">CONFIGURACION DEL MOTOR IA</text>
+
+  <!-- Dropzone Card -->
+  <rect x="42" y="128" width="254" height="72" rx="10" fill="#090d16" stroke="#6366f1" stroke-width="1.2" stroke-dasharray="4 3" />
+  <text x="169" y="156" font-family="Segoe UI, Inter, system-ui, sans-serif" font-size="13" font-weight="700" fill="#e2e8f0" text-anchor="middle">podcast_creadores_4k.mp4</text>
+  <text x="169" y="176" font-family="Segoe UI, Inter, system-ui, sans-serif" font-size="11" fill="#818cf8" text-anchor="middle">1080x1920 • 02:14 • 48kHz Stereo</text>
+
+  <!-- Model & Task Selectors -->
+  <text x="44" y="224" font-family="Segoe UI, Inter, system-ui, sans-serif" font-size="11" font-weight="600" fill="#94a3b8">MODELO NEURONAL &amp; TAREA</text>
+  <rect x="42" y="232" width="122" height="34" rx="8" fill="#0f172a" stroke="#334155" stroke-width="1" />
+  <text x="103" y="253" font-family="Segoe UI, Inter, system-ui, sans-serif" font-size="12" font-weight="600" fill="#f8fafc" text-anchor="middle">Small (Pro)</text>
+  <rect x="174" y="232" width="122" height="34" rx="8" fill="#1e1b4b" stroke="#6366f1" stroke-width="1" />
+  <text x="235" y="253" font-family="Segoe UI, Inter, system-ui, sans-serif" font-size="12" font-weight="600" fill="#a5b4fc" text-anchor="middle">Transcribir ES</text>
+
+  <!-- Segmentation Mode -->
+  <text x="44" y="290" font-family="Segoe UI, Inter, system-ui, sans-serif" font-size="11" font-weight="600" fill="#94a3b8">SEGMENTACION VIRAL (WORD-LEVEL)</text>
+  <rect x="42" y="298" width="254" height="34" rx="8" fill="#0f172a" stroke="#334155" stroke-width="1" />
+  <text x="169" y="319" font-family="Segoe UI, Inter, system-ui, sans-serif" font-size="12" font-weight="600" fill="#38bdf8" text-anchor="middle">Ritmo Dinamico: 3 palabras / linea</text>
+
+  <!-- Viral Style Presets -->
+  <text x="44" y="356" font-family="Segoe UI, Inter, system-ui, sans-serif" font-size="11" font-weight="600" fill="#94a3b8">PLANTILLAS VIRALES (PRESETS)</text>
+  <rect x="42" y="366" width="122" height="36" rx="8" fill="#2e2606" stroke="#facc15" stroke-width="1.5" />
+  <text x="103" y="388" font-family="Segoe UI, Inter, system-ui, sans-serif" font-size="12" font-weight="700" fill="#fde047" text-anchor="middle">Hormozi Neon</text>
+
+  <rect x="174" y="366" width="122" height="36" rx="8" fill="#0f172a" stroke="#334155" stroke-width="1" />
+  <text x="235" y="388" font-family="Segoe UI, Inter, system-ui, sans-serif" font-size="12" font-weight="600" fill="#cbd5e1" text-anchor="middle">MrBeast Impact</text>
+
+  <rect x="42" y="410" width="122" height="36" rx="8" fill="#0f172a" stroke="#334155" stroke-width="1" />
+  <text x="103" y="432" font-family="Segoe UI, Inter, system-ui, sans-serif" font-size="12" font-weight="600" fill="#67e8f9" text-anchor="middle">Cyberpunk</text>
+
+  <rect x="174" y="410" width="122" height="36" rx="8" fill="#0f172a" stroke="#334155" stroke-width="1" />
+  <text x="235" y="432" font-family="Segoe UI, Inter, system-ui, sans-serif" font-size="12" font-weight="600" fill="#94a3b8" text-anchor="middle">Cinema Classic</text>
+
+  <!-- CTA Generate Button -->
+  <rect x="42" y="468" width="254" height="44" rx="10" fill="url(#accentGrad)" />
+  <text x="169" y="495" font-family="Segoe UI, Inter, system-ui, sans-serif" font-size="13" font-weight="800" fill="#ffffff" text-anchor="middle">GENERAR SUBTITULOS CON IA</text>
+
+  <!-- Export Badges -->
+  <rect x="42" y="526" width="58" height="28" rx="6" fill="#1e293b" />
+  <text x="71" y="544" font-family="Segoe UI, Inter, system-ui, sans-serif" font-size="11" font-weight="700" fill="#e2e8f0" text-anchor="middle">.SRT</text>
+  <rect x="107" y="526" width="58" height="28" rx="6" fill="#311042" stroke="#c084fc" stroke-width="1" />
+  <text x="136" y="544" font-family="Segoe UI, Inter, system-ui, sans-serif" font-size="11" font-weight="700" fill="#e9d5ff" text-anchor="middle">.ASS</text>
+  <rect x="172" y="526" width="124" height="28" rx="6" fill="#064e3b" stroke="#10b981" stroke-width="1" />
+  <text x="234" y="544" font-family="Segoe UI, Inter, system-ui, sans-serif" font-size="11" font-weight="700" fill="#6ee7b7" text-anchor="middle">QUEMAR .MP4</text>
+
+  <!-- CENTER PANEL: 9:16 Live Simulator & Audio Spectrum -->
+  <rect x="328" y="82" width="350" height="524" rx="14" fill="url(#cardGrad)" stroke="#1e293b" stroke-width="1.5" />
+  <text x="348" y="114" font-family="Segoe UI, Inter, system-ui, sans-serif" font-size="13" font-weight="700" fill="#94a3b8" letter-spacing="0.8">SIMULADOR EN VIVO</text>
+
+  <!-- Aspect Ratio Toggle -->
+  <rect x="530" y="96" width="62" height="24" rx="6" fill="#6366f1" />
+  <text x="561" y="112" font-family="Segoe UI, Inter, system-ui, sans-serif" font-size="11" font-weight="700" fill="#ffffff" text-anchor="middle">9:16</text>
+  <rect x="598" y="96" width="62" height="24" rx="6" fill="#0f172a" stroke="#334155" stroke-width="1" />
+  <text x="629" y="112" font-family="Segoe UI, Inter, system-ui, sans-serif" font-size="11" font-weight="600" fill="#94a3b8" text-anchor="middle">16:9</text>
+
+  <!-- 9:16 Vertical Phone Frame -->
+  <rect x="393" y="132" width="220" height="380" rx="22" fill="url(#phoneScreen)" stroke="#334155" stroke-width="3" />
+  <rect x="473" y="140" width="60" height="6" rx="3" fill="#1e293b" />
+
+  <!-- Decorative Waveform inside Phone -->
+  <g fill="#6366f1" opacity="0.55">
+    <rect x="425" y="255" width="6" height="30" rx="3" />
+    <rect x="437" y="235" width="6" height="70" rx="3" />
+    <rect x="449" y="220" width="6" height="100" rx="3" />
+    <rect x="461" y="245" width="6" height="50" rx="3" />
+    <rect x="473" y="210" width="6" height="120" rx="3" fill="#8b5cf6" />
+    <rect x="485" y="195" width="6" height="150" rx="3" fill="#06b6d4" />
+    <rect x="497" y="225" width="6" height="90" rx="3" fill="#06b6d4" />
+    <rect x="509" y="205" width="6" height="130" rx="3" fill="#8b5cf6" />
+    <rect x="521" y="230" width="6" height="80" rx="3" />
+    <rect x="533" y="215" width="6" height="110" rx="3" fill="#8b5cf6" />
+    <rect x="545" y="240" width="6" height="60" rx="3" />
+    <rect x="557" y="250" width="6" height="40" rx="3" />
+    <rect x="569" y="260" width="6" height="20" rx="3" />
+  </g>
+
+  <!-- Live Viral Subtitle Overlay (Hormozi Style) -->
+  <rect x="409" y="388" width="188" height="58" rx="10" fill="#000000" fill-opacity="0.78" stroke="#facc15" stroke-width="1.5" />
+  <text x="503" y="413" font-family="Segoe UI, Inter, system-ui, sans-serif" font-size="16" font-weight="900" fill="#ffffff" text-anchor="middle">SUBTITULOS CON</text>
+  <text x="503" y="436" font-family="Segoe UI, Inter, system-ui, sans-serif" font-size="18" font-weight="900" fill="#facc15" text-anchor="middle">IA EN SEGUNDOS</text>
+
+  <!-- Bottom Player Scrubber & KPIs -->
+  <rect x="348" y="528" width="310" height="6" rx="3" fill="#1e293b" />
+  <rect x="348" y="528" width="142" height="6" rx="3" fill="url(#accentGrad)" />
+  <circle cx="490" cy="531" r="6" fill="#ffffff" />
+
+  <text x="348" y="556" font-family="Segoe UI, Inter, system-ui, sans-serif" font-size="11" font-weight="700" fill="#cbd5e1">00:42.4 / 02:14.0</text>
+  <text x="658" y="556" font-family="Segoe UI, Inter, system-ui, sans-serif" font-size="11" font-weight="700" fill="#34d399" text-anchor="end">164 WPM • 14.2 CPS</text>
+
+  <!-- RIGHT PANEL: Interactive Subtitle Editor & CPS Traffic Light -->
+  <rect x="692" y="82" width="484" height="524" rx="14" fill="url(#cardGrad)" stroke="#1e293b" stroke-width="1.5" />
+  <text x="714" y="114" font-family="Segoe UI, Inter, system-ui, sans-serif" font-size="13" font-weight="700" fill="#94a3b8" letter-spacing="0.8">EDITOR DE LINEA DE TIEMPO &amp; SINCRONIZACION</text>
+
+  <!-- Toolbar Buttons -->
+  <rect x="714" y="128" width="66" height="26" rx="6" fill="#1e293b" />
+  <text x="747" y="145" font-family="Segoe UI, Inter, system-ui, sans-serif" font-size="11" font-weight="600" fill="#e2e8f0" text-anchor="middle">Ctrl+Z</text>
+  <rect x="786" y="128" width="76" height="26" rx="6" fill="#1e293b" />
+  <text x="824" y="145" font-family="Segoe UI, Inter, system-ui, sans-serif" font-size="11" font-weight="600" fill="#fde047" text-anchor="middle">MAYUS</text>
+  <rect x="868" y="128" width="92" height="26" rx="6" fill="#1e293b" />
+  <text x="914" y="145" font-family="Segoe UI, Inter, system-ui, sans-serif" font-size="11" font-weight="600" fill="#38bdf8" text-anchor="middle">Sin puntos</text>
+  <rect x="966" y="128" width="90" height="26" rx="6" fill="#1e293b" />
+  <text x="1011" y="145" font-family="Segoe UI, Inter, system-ui, sans-serif" font-size="11" font-weight="600" fill="#cbd5e1" text-anchor="middle">±0.1s Sync</text>
+  <rect x="1062" y="128" width="92" height="26" rx="6" fill="#1e1b4b" stroke="#6366f1" stroke-width="1" />
+  <text x="1108" y="145" font-family="Segoe UI, Inter, system-ui, sans-serif" font-size="11" font-weight="700" fill="#a5b4fc" text-anchor="middle">Capitulos YT</text>
+
+  <!-- Subtitle Card 1 -->
+  <rect x="714" y="168" width="440" height="86" rx="10" fill="#0b111e" stroke="#1e293b" stroke-width="1" />
+  <text x="730" y="192" font-family="Consolas, monospace" font-size="11" font-weight="700" fill="#64748b">#01</text>
+  <text x="768" y="192" font-family="Consolas, monospace" font-size="11" fill="#94a3b8">00:00:39,120 → 00:00:41,450</text>
+  <rect x="1056" y="176" width="84" height="20" rx="10" fill="#064e3b" />
+  <text x="1098" y="190" font-family="Segoe UI, Inter, system-ui, sans-serif" font-size="10" font-weight="700" fill="#34d399" text-anchor="middle">12.4 CPS OK</text>
+  <text x="730" y="226" font-family="Segoe UI, Inter, system-ui, sans-serif" font-size="14" font-weight="600" fill="#e2e8f0">CREA CONTENIDO VIRAL SIN SUSCRIPCIONES</text>
+
+  <!-- Subtitle Card 2 (ACTIVE) -->
+  <rect x="714" y="266" width="440" height="92" rx="10" fill="#131c38" stroke="#6366f1" stroke-width="2" />
+  <rect x="714" y="266" width="5" height="92" rx="2.5" fill="#6366f1" />
+  <text x="732" y="292" font-family="Consolas, monospace" font-size="11" font-weight="700" fill="#818cf8">#02 • ACTIVO</text>
+  <text x="820" y="292" font-family="Consolas, monospace" font-size="11" fill="#c7d2fe">00:00:41,500 → 00:00:43,200</text>
+  <rect x="1056" y="276" width="84" height="20" rx="10" fill="#064e3b" />
+  <text x="1098" y="290" font-family="Segoe UI, Inter, system-ui, sans-serif" font-size="10" font-weight="700" fill="#34d399" text-anchor="middle">14.2 CPS OK</text>
+  <text x="732" y="326" font-family="Segoe UI, Inter, system-ui, sans-serif" font-size="15" font-weight="800" fill="#fde047">SUBTITULOS CON IA EN SEGUNDOS</text>
+  <text x="732" y="346" font-family="Segoe UI, Inter, system-ui, sans-serif" font-size="10" fill="#94a3b8">Acciones rapidas: [Dividir ✂️]   [Unir 🔗]   [Duplicar]</text>
+
+  <!-- Subtitle Card 3 -->
+  <rect x="714" y="370" width="440" height="86" rx="10" fill="#0b111e" stroke="#1e293b" stroke-width="1" />
+  <text x="730" y="394" font-family="Consolas, monospace" font-size="11" font-weight="700" fill="#64748b">#03</text>
+  <text x="768" y="394" font-family="Consolas, monospace" font-size="11" fill="#94a3b8">00:00:43,250 → 00:00:45,100</text>
+  <rect x="1056" y="378" width="84" height="20" rx="10" fill="#422006" />
+  <text x="1098" y="392" font-family="Segoe UI, Inter, system-ui, sans-serif" font-size="10" font-weight="700" fill="#fbbf24" text-anchor="middle">19.1 CPS RAPIDO</text>
+  <text x="730" y="428" font-family="Segoe UI, Inter, system-ui, sans-serif" font-size="14" font-weight="600" fill="#e2e8f0">EXPORTA A DAVINCI RESOLVE O QUEMA EN MP4</text>
+
+  <!-- Subtitle Card 4 -->
+  <rect x="714" y="468" width="440" height="86" rx="10" fill="#0b111e" stroke="#1e293b" stroke-width="1" />
+  <text x="730" y="492" font-family="Consolas, monospace" font-size="11" font-weight="700" fill="#64748b">#04</text>
+  <text x="768" y="492" font-family="Consolas, monospace" font-size="11" fill="#94a3b8">00:00:45,150 → 00:00:47,600</text>
+  <rect x="1056" y="476" width="84" height="20" rx="10" fill="#064e3b" />
+  <text x="1098" y="490" font-family="Segoe UI, Inter, system-ui, sans-serif" font-size="10" font-weight="700" fill="#34d399" text-anchor="middle">11.8 CPS OK</text>
+  <text x="730" y="526" font-family="Segoe UI, Inter, system-ui, sans-serif" font-size="14" font-weight="600" fill="#e2e8f0">100% LOCAL PRIVADO Y OPEN SOURCE</text>
+
+  <!-- Footer Status Bar -->
+  <text x="714" y="582" font-family="Segoe UI, Inter, system-ui, sans-serif" font-size="11" fill="#64748b">Autoguardado activo en localStorage • Pila Undo/Redo (50 estados) • HTTP 206 Streaming</text>
+</svg>

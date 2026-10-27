@@ -1,56 +1,62 @@
 @echo off
-chcp 65001 >nul
+setlocal EnableExtensions
+cd /d "%~dp0"
 title PiSubtitles Studio - Instalador Automatizado
+
 echo =====================================================================
-echo    PiSubtitles Studio - Instalación de Entorno y Dependencias
+echo    PiSubtitles Studio - Configuracion de Entorno y Dependencias
 echo =====================================================================
 echo.
 
-:: Verificar si Python está instalado
+set "PY_CMD="
+if exist "%LocalAppData%\Programs\Python\Python313\python.exe" set "PY_CMD=%LocalAppData%\Programs\Python\Python313\python.exe"
+if not defined PY_CMD if exist "%LocalAppData%\Programs\Python\Python312\python.exe" set "PY_CMD=%LocalAppData%\Programs\Python\Python312\python.exe"
+if not defined PY_CMD if exist "%LocalAppData%\Programs\Python\Python311\python.exe" set "PY_CMD=%LocalAppData%\Programs\Python\Python311\python.exe"
+if defined PY_CMD goto :found_python
+
 where python >nul 2>nul
-if %errorlevel% neq 0 (
-    echo [ERROR] No se encontró Python en el sistema.
-    echo Por favor, instala Python 3.10 o superior desde https://www.python.org/
-    echo y asegurate de marcar la casilla "Add python.exe to PATH".
-    echo.
-    pause
-    exit /b 1
-)
+if errorlevel 1 goto :no_python
+set "PY_CMD=python"
 
-:: Mostrar versión de Python
-for /f "tokens=*" %%i in ('python --version') do echo [INFO] Detectado: %%i
+:found_python
+echo [INFO] Usando interprete: %PY_CMD%
+"%PY_CMD%" --version
 
-:: Crear entorno virtual .venv si no existe
-if not exist ".venv" (
-    echo [INFO] Creando entorno virtual aislado (.venv)...
-    python -m venv .venv
-    if %errorlevel% neq 0 (
-        echo [ERROR] No se pudo crear el entorno virtual.
-        pause
-        exit /b 1
-    )
-    echo [OK] Entorno virtual creado exitosamente.
-) else (
-    echo [INFO] Entorno virtual existente detectado.
-)
+if exist ".venv\Scripts\python.exe" goto :venv_ready
 
-:: Actualizar pip dentro del entorno
-echo [INFO] Actualizando gestor de paquetes pip...
-call .venv\Scripts\python.exe -m pip install --upgrade pip --quiet
+echo [INFO] Creando entorno virtual aislado en .venv ...
+"%PY_CMD%" -m venv --system-site-packages .venv
+if exist ".venv\Scripts\python.exe" goto :venv_ready
 
-:: Instalar dependencias
-echo [INFO] Instalando dependencias desde requirements.txt (Faster-Whisper, PyWebView, etc.)...
-call .venv\Scripts\python.exe -m pip install -r requirements.txt
-if %errorlevel% neq 0 (
-    echo [ERROR] Error al instalar dependencias. Revisa tu conexión a internet o logs.
-    pause
-    exit /b 1
-)
+echo [AVISO] Reintentando creacion rapida de entorno virtual...
+"%PY_CMD%" -m venv --without-pip --system-site-packages .venv
+if exist ".venv\Scripts\python.exe" goto :venv_ready
 
-echo.
-echo =====================================================================
-echo    ¡Instalación completada con éxito!
-echo    Ya puedes iniciar la aplicación ejecutando: start.bat
-echo =====================================================================
-echo.
+echo [ERROR] No se pudo crear el entorno virtual.
+if "%~1"=="--nopause" exit /b 1
 pause
+exit /b 1
+
+:venv_ready
+echo [OK] Entorno virtual .venv listo.
+echo [INFO] Verificando dependencias desde requirements.txt...
+".venv\Scripts\python.exe" -m pip install -r requirements.txt --quiet 2>nul
+if errorlevel 1 "%PY_CMD%" -m pip install -r requirements.txt --quiet
+
+if exist "build_exe.bat" call build_exe.bat --nopause
+
+echo.
+echo =====================================================================
+echo    [OK] Instalacion completada con exito!
+echo    Haz doble clic en PiSubtitles.exe para abrir la aplicacion.
+echo =====================================================================
+if "%~1"=="--nopause" exit /b 0
+pause
+exit /b 0
+
+:no_python
+echo [ERROR] No se encontro Python en el sistema.
+echo Por favor instala Python 3.10 o superior desde https://www.python.org/
+if "%~1"=="--nopause" exit /b 1
+pause
+exit /b 1

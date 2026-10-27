@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>PiSubtitles Studio - Subtítulos Automáticos con IA</title>
+  <title>PiSubtitles Studio v2.0 - Subtítulos Automáticos con IA para Creadores</title>
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body class="dark-theme">
@@ -19,19 +19,54 @@
     <header class="app-header">
       <div class="header-brand">
         <div class="brand-logo">
-          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
             <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
             <path d="M8 9h8"></path>
             <path d="M8 13h5"></path>
           </svg>
         </div>
         <div class="brand-text">
-          <h1>PiSubtitles <span class="badge-pro">STUDIO</span></h1>
-          <p class="brand-tagline">Subtítulos automáticos con IA para Creadores de Contenido</p>
+          <h1>PiSubtitles <span class="badge-pro">STUDIO 2.0</span></h1>
+          <p class="brand-tagline">Estudio de Subtitulado IA, Sincronización y Estilos Virales para Creadores</p>
         </div>
       </div>
 
       <div class="header-actions">
+        <button type="button" class="btn btn-secondary btn-sm" id="btnImportSRT" title="Importar un archivo .SRT existente para editar">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+            <polyline points="17 8 12 3 7 8"></polyline>
+            <line x1="12" y1="3" x2="12" y2="15"></line>
+          </svg>
+          <span>Importar .SRT</span>
+        </button>
+
+        <button type="button" class="btn btn-secondary btn-sm" id="btnYoutubeChapters" title="Generar capítulos para descripción de YouTube">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="8" y1="6" x2="21" y2="6"></line>
+            <line x1="8" y1="12" x2="21" y2="12"></line>
+            <line x1="8" y1="18" x2="21" y2="18"></line>
+            <line x1="3" y1="6" x2="3.01" y2="6"></line>
+            <line x1="3" y1="12" x2="3.01" y2="12"></line>
+            <line x1="3" y1="18" x2="3.01" y2="18"></line>
+          </svg>
+          <span>Capítulos YT</span>
+        </button>
+
+        <button type="button" class="btn-icon" id="btnShortcutsModal" title="Atajos de teclado profesionales">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="2" y="4" width="20" height="16" rx="2" ry="2"></rect>
+            <path d="M6 8h.001"></path>
+            <path d="M10 8h.001"></path>
+            <path d="M14 8h.001"></path>
+            <path d="M18 8h.001"></path>
+            <path d="M8 12h.001"></path>
+            <path d="M12 12h.001"></path>
+            <path d="M16 12h.001"></path>
+            <path d="M7 16h10"></path>
+          </svg>
+        </button>
+
         <div class="status-chip" id="hwChip" title="Aceleración de cómputo detectada">
           <span class="status-dot"></span>
           <span id="hwLabel">Detectando hardware...</span>
@@ -52,23 +87,23 @@
             
             <div class="drop-idle-content" id="dropIdleContent">
               <div class="drop-icon-wrapper">
-                <svg width="38" height="38" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
                   <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
                   <polyline points="17 8 12 3 7 8"></polyline>
                   <line x1="12" y1="3" x2="12" y2="15"></line>
                 </svg>
               </div>
-              <h3 class="drop-title">Arrastra y suelta tu archivo aquí</h3>
-              <p class="drop-subtitle">Soporta MP4, MP3, WAV, MKV, MOV, M4A, WEBM y más</p>
+              <h3 class="drop-title">Arrastra y suelta tu vídeo o audio aquí</h3>
+              <p class="drop-subtitle">MP4, MOV, MKV, WEBM, MP3, WAV, M4A, FLAC</p>
               <div class="drop-buttons">
                 <button type="button" class="btn btn-secondary btn-glow" id="btnBrowse">
-                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                     <path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path>
                   </svg>
                   <span>Explorar Archivo</span>
                 </button>
-                <button type="button" class="btn btn-ghost btn-sm" id="btnLoadSample" title="Cargar archivo de muestra">
-                  <span>Probar muestra</span>
+                <button type="button" class="btn btn-ghost btn-sm" id="btnLoadSample" title="Cargar audio de prueba">
+                  <span>⚡ Probar muestra</span>
                 </button>
               </div>
             </div>
@@ -76,27 +111,30 @@
             <!-- VISTA DE ARCHIVO CARGADO -->
             <div class="drop-active-file" id="dropActiveFile" style="display: none;">
               <div class="file-preview-card">
-                <div class="file-icon-badge" id="fileExtBadge">MP3</div>
+                <div class="file-icon-badge" id="fileExtBadge">MP4</div>
                 <div class="file-info-details">
-                  <h4 class="file-name-text" id="fileNameText">audio.mp3</h4>
+                  <h4 class="file-name-text" id="fileNameText">video.mp4</h4>
                   <div class="file-meta-row">
                     <span class="meta-tag" id="fileSizeText">0 MB</span>
                     <span class="meta-divider">•</span>
                     <span class="meta-tag" id="fileDurationText">00:00</span>
                     <span class="meta-divider">•</span>
-                    <span class="meta-tag tag-ready">Listo para transcribir</span>
+                    <span class="meta-tag tag-ready" id="fileTypeTag">Listo</span>
                   </div>
                 </div>
                 <div class="file-actions">
+                  <button type="button" class="btn btn-secondary btn-sm" id="btnQuickSaveSource" title="Guardar .SRT directamente en la misma carpeta del archivo (Ctrl+S)">
+                    <span>⚡ Guardar junto al original</span>
+                  </button>
                   <button type="button" class="btn-icon" id="btnChangeFile" title="Cambiar archivo">
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                       <polyline points="1 4 1 10 7 10"></polyline>
                       <polyline points="23 20 23 14 17 14"></polyline>
                       <path d="M20.49 9A9 9 0 0 0 5.64 5.64L1 10m22 4l-4.64 4.36A9 9 0 0 1 3.51 15"></path>
                     </svg>
                   </button>
                   <button type="button" class="btn-icon btn-icon-danger" id="btnRemoveFile" title="Quitar archivo">
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                       <line x1="18" y1="6" x2="6" y2="18"></line>
                       <line x1="6" y1="6" x2="18" y2="18"></line>
                     </svg>
@@ -110,101 +148,92 @@
 
         <!-- PANEL DE OPCIONES DE TRANSCRIPCIÓN -->
         <div class="card glass-card config-section">
-          <div class="card-header">
-            <h2 class="card-title">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <circle cx="12" cy="12" r="3"></circle>
-                <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
-              </svg>
-              <span>Ajustes de IA</span>
-            </h2>
-          </div>
-
           <div class="config-grid">
             <!-- Selector de Idioma -->
             <div class="form-group">
-              <label for="selectLanguage" class="form-label">Idioma</label>
-              <div class="custom-select-wrapper">
-                <select id="selectLanguage" class="custom-select">
-                  <option value="auto">🌐 Detección Automática</option>
-                  <option value="es" selected>🇪🇸 Español</option>
-                  <option value="en">🇬🇧 English</option>
-                  <option value="fr">🇫🇷 Français</option>
-                  <option value="de">🇩🇪 Deutsch</option>
-                  <option value="it">🇮🇹 Italiano</option>
-                  <option value="pt">🇵🇹 Português</option>
-                  <option value="ca">Català</option>
-                  <option value="gl">Galego</option>
-                  <option value="eu">Euskara</option>
-                  <option value="ja">🇯🇵 日本語</option>
-                  <option value="zh">🇨🇳 中文</option>
-                </select>
-              </div>
+              <label for="selectLanguage" class="form-label">Idioma Origen</label>
+              <select id="selectLanguage" class="custom-select">
+                <option value="auto">🌐 Detección Automática</option>
+                <option value="es" selected>🇪🇸 Español</option>
+                <option value="en">🇬🇧 English</option>
+                <option value="fr">🇫🇷 Français</option>
+                <option value="de">🇩🇪 Deutsch</option>
+                <option value="it">🇮🇹 Italiano</option>
+                <option value="pt">🇵🇹 Português</option>
+                <option value="ca">Català</option>
+                <option value="gl">Galego</option>
+                <option value="eu">Euskara</option>
+                <option value="ja">🇯🇵 日本語</option>
+                <option value="zh">🇨🇳 中文</option>
+              </select>
             </div>
 
             <!-- Selector de Modelo Whisper -->
             <div class="form-group">
-              <label for="selectModel" class="form-label">Modelo Whisper</label>
-              <div class="custom-select-wrapper">
-                <select id="selectModel" class="custom-select">
-                  <option value="tiny">Tiny (Ultra rápido, ~39M)</option>
-                  <option value="base">Base (Rápido y ligero, ~74M)</option>
-                  <option value="small" selected>Small (Recomendado, ~244M)</option>
-                  <option value="medium">Medium (Máxima precisión, ~769M)</option>
-                </select>
-              </div>
+              <label for="selectModel" class="form-label">Tamaño de Modelo</label>
+              <select id="selectModel" class="custom-select">
+                <option value="tiny">Tiny (Ultra rápido, ~39M)</option>
+                <option value="base">Base (Rápido, ~74M)</option>
+                <option value="small" selected>Small (Recomendado, ~244M)</option>
+                <option value="medium">Medium (Alta precisión, ~769M)</option>
+              </select>
             </div>
 
-            <!-- Modo de Segmentación -->
-            <div class="form-group full-width">
-              <div class="mode-toggle-header">
-                <label class="form-label">Modo de Segmentación</label>
-                <div class="mode-tabs">
-                  <button type="button" class="mode-tab active" id="tabModeWords" data-mode="words">Shorts / Reels</button>
-                  <button type="button" class="mode-tab" id="tabModeSentence" data-mode="sentence">Frases Naturales</button>
-                </div>
-              </div>
+            <!-- Selector de Tarea IA (Transcribir vs Traducir) -->
+            <div class="form-group">
+              <label for="selectTask" class="form-label">Tarea IA</label>
+              <select id="selectTask" class="custom-select">
+                <option value="transcribe" selected>🎙️ Transcribir (Mismo idioma)</option>
+                <option value="translate">🌍 Traducir a Inglés (Directo)</option>
+              </select>
+            </div>
 
-              <!-- Control deslizante de palabras por línea (Modo Creadores) -->
-              <div class="words-control-box" id="wordsControlBox">
-                <div class="slider-header">
-                  <span class="slider-caption">Máximo de palabras por línea:</span>
-                  <span class="slider-val-badge" id="sliderValBadge">4 palabras</span>
-                </div>
-                <div class="slider-row">
-                  <input type="range" id="wordsSlider" min="1" max="10" value="4" class="custom-slider">
-                  <div class="preset-chips">
-                    <button type="button" class="chip-btn" data-val="3">3</button>
-                    <button type="button" class="chip-btn active" data-val="4">4</button>
-                    <button type="button" class="chip-btn" data-val="5">5</button>
-                    <button type="button" class="chip-btn" data-val="6">6</button>
+            <!-- Vocabulario Personalizado / Prompt Inicial -->
+            <div class="form-group" style=" grid-column: span 2;">
+              <label for="inputInitialPrompt" class="form-label">Vocabulario / Nombres Propios (Opcional)</label>
+              <input type="text" id="inputInitialPrompt" class="custom-input" placeholder="Ej: PiSubtitles, YouTube, TikTok, nombres de marcas o términos técnicos...">
+            </div>
+
+            <!-- Modo de Segmentación + Botón Generar en la misma fila -->
+            <div class="form-group" style="grid-column: span 3;">
+              <div class="segmentation-action-bar">
+                <div class="seg-controls-left">
+                  <div class="mode-tabs">
+                    <button type="button" class="mode-tab active" id="tabModeWords" data-mode="words">📱 Shorts / Reels</button>
+                    <button type="button" class="mode-tab" id="tabModeSentence" data-mode="sentence">🎬 Frases Naturales</button>
+                  </div>
+
+                  <div class="words-inline-box" id="wordsControlBox">
+                    <span class="slider-caption">Palabras/línea:</span>
+                    <input type="range" id="wordsSlider" min="1" max="10" value="4" class="custom-slider">
+                    <span class="slider-val-badge" id="sliderValBadge">4 pal.</span>
+                    <div class="preset-chips">
+                      <button type="button" class="chip-btn" data-val="2">2</button>
+                      <button type="button" class="chip-btn" data-val="3">3</button>
+                      <button type="button" class="chip-btn active" data-val="4">4</button>
+                      <button type="button" class="chip-btn" data-val="5">5</button>
+                    </div>
                   </div>
                 </div>
-                <p class="slider-hint">💡 Ideal para subtítulos dinámicos estilo MrBeast, Alex Hormozi o TikTok.</p>
+
+                <div class="action-footer">
+                  <button type="button" class="btn btn-primary btn-generate" id="btnStartTranscribe" disabled>
+                    <div class="btn-content">
+                      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                        <polygon points="5 3 19 12 5 21 5 3"></polygon>
+                      </svg>
+                      <span>Generar Subtítulos</span>
+                    </div>
+                    <div class="btn-shimmer"></div>
+                  </button>
+                  <button type="button" class="btn btn-danger btn-cancel" id="btnCancelTranscribe" style="display: none;">
+                    <span>⏹ Cancelar</span>
+                  </button>
+                </div>
               </div>
             </div>
 
           </div>
-
-          <!-- BOTÓN DE ACCIÓN PRINCIPAL -->
-          <div class="action-footer">
-            <button type="button" class="btn btn-primary btn-generate" id="btnStartTranscribe" disabled>
-              <div class="btn-content">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-                  <polygon points="5 3 19 12 5 21 5 3"></polygon>
-                </svg>
-                <span>Generar Subtítulos</span>
-              </div>
-              <div class="btn-shimmer"></div>
-            </button>
-            <button type="button" class="btn btn-danger btn-cancel" id="btnCancelTranscribe" style="display: none;">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
-              </svg>
-              <span>Cancelar</span>
-            </button>
-          </div>
-
         </div>
 
       </section>
@@ -226,7 +255,6 @@
             </div>
           </div>
 
-          <!-- Ticker / Visor de frases en vivo -->
           <div class="live-ticker">
             <span class="ticker-label">EN VIVO:</span>
             <span class="ticker-text" id="liveTickerText">Esperando primer segmento de voz...</span>
@@ -234,25 +262,27 @@
         </div>
       </section>
 
-      <!-- SECCIÓN DEL EDITOR Y PREVISUALIZADOR INTEGRADO -->
+      <!-- SECCIÓN DEL ESTUDIO: REPRODUCTOR, EDITOR Y PREVISUALIZADOR VISUAL -->
       <section class="editor-section" id="editorSection">
         
         <div class="card glass-card editor-card">
           
-          <!-- BARRA DE REPRODUCCIÓN DE AUDIO SINCRONIZADA -->
+          <!-- BARRA DE REPRODUCCIÓN DE AUDIO + ESPECTRO EN VIVO -->
           <div class="audio-player-bar" id="audioPlayerBar">
-            <audio id="mainAudioElement" preload="auto"></audio>
+            <audio id="mainAudioElement" crossorigin="anonymous" preload="auto"></audio>
 
             <div class="player-controls">
+              <button type="button" class="btn-icon" id="btnSeekBack" title="Retroceder 2s (Alt+Izquierda)">-2s</button>
               <button type="button" class="player-btn-play" id="btnPlayerPlay" title="Reproducir/Pausar (Espacio)">
-                <svg id="iconPlay" width="22" height="22" viewBox="0 0 24 24" fill="currentColor">
+                <svg id="iconPlay" width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
                   <polygon points="5 3 19 12 5 21 5 3"></polygon>
                 </svg>
-                <svg id="iconPause" width="22" height="22" viewBox="0 0 24 24" fill="currentColor" style="display: none;">
+                <svg id="iconPause" width="20" height="20" viewBox="0 0 24 24" fill="currentColor" style="display: none;">
                   <rect x="6" y="4" width="4" height="16"></rect>
                   <rect x="14" y="4" width="4" height="16"></rect>
                 </svg>
               </button>
+              <button type="button" class="btn-icon" id="btnSeekForward" title="Avanzar 2s (Alt+Derecha)">+2s</button>
 
               <div class="player-time-display">
                 <span id="playerCurrentTime">00:00</span>
@@ -269,50 +299,77 @@
               </div>
             </div>
 
+            <!-- Visualizador de Espectro de Audio en Tiempo Real -->
+            <canvas id="audioSpectrumCanvas" width="130" height="28" class="spectrum-canvas" title="Espectro de frecuencia de voz"></canvas>
+
             <div class="player-options">
-              <button type="button" class="btn-ghost btn-sm speed-btn" id="btnPlaybackSpeed">1.0x</button>
+              <button type="button" class="btn-ghost btn-sm speed-btn" id="btnPlaybackSpeed" title="Velocidad de reproducción">1.0x</button>
             </div>
           </div>
 
-          <!-- BARRA DE HERRAMIENTAS Y EXPORTACIÓN -->
+          <!-- BARRA DE HERRAMIENTAS AVANZADAS DE CREADOR -->
           <div class="editor-toolbar">
             <div class="toolbar-left">
-              <div class="stats-badge">
-                <span id="subtitlesCountText">0 subtítulos</span>
-                <span class="meta-divider">•</span>
-                <span id="wordsCountText">0 palabras</span>
+              <!-- Deshacer / Rehacer -->
+              <div class="tool-group">
+                <button type="button" class="btn-icon" id="btnUndo" title="Deshacer (Ctrl+Z)" disabled>↶</button>
+                <button type="button" class="btn-icon" id="btnRedo" title="Rehacer (Ctrl+Y)" disabled>↷</button>
               </div>
+
+              <!-- Time-Shift Global -->
+              <div class="tool-group" title="Desplazar todos los subtítulos en el tiempo">
+                <span class="tool-label">Sync:</span>
+                <button type="button" class="btn-chip" data-shift="-0.5">-0.5s</button>
+                <button type="button" class="btn-chip" data-shift="-0.1">-0.1s</button>
+                <button type="button" class="btn-chip" data-shift="0.1">+0.1s</button>
+                <button type="button" class="btn-chip" data-shift="0.5">+0.5s</button>
+              </div>
+
+              <!-- Transformaciones de Texto en 1 Clic -->
+              <div class="tool-group" title="Transformación rápida de estilo de texto">
+                <button type="button" class="btn-chip" id="btnTransformUpper" title="Convertir todo a MAYÚSCULAS (Estilo Viral)">AA</button>
+                <button type="button" class="btn-chip" id="btnTransformSentence" title="Formato tipo oración">Aa</button>
+                <button type="button" class="btn-chip" id="btnTransformCleanPunct" title="Quitar puntos finales (Estilo Shorts/TikTok)">Sin .</button>
+              </div>
+
+              <!-- Buscador y Reemplazar -->
               <div class="search-box">
-                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                   <circle cx="11" cy="11" r="8"></circle>
                   <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
                 </svg>
-                <input type="text" id="searchInput" placeholder="Buscar en subtítulos..." class="search-input">
+                <input type="text" id="searchInput" placeholder="Buscar..." class="search-input">
+                <button type="button" class="btn-chip" id="btnToggleReplace" title="Buscar y reemplazar texto">⇄</button>
+              </div>
+
+              <!-- Estadísticas -->
+              <div class="stats-badge">
+                <span id="subtitlesCountText">0 subs</span>
+                <span class="meta-divider">•</span>
+                <span id="wordsCountText">0 pal.</span>
+                <span class="meta-divider">•</span>
+                <span id="wpmCountText">0 WPM</span>
               </div>
             </div>
 
             <div class="toolbar-right">
               <button type="button" class="btn btn-secondary btn-sm" id="btnAddSubtitleRow" title="Añadir nueva fila">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                  <line x1="12" y1="5" x2="12" y2="19"></line>
-                  <line x1="5" y1="12" x2="19" y2="12"></line>
-                </svg>
-                <span>Añadir</span>
+                <span>+ Fila</span>
               </button>
 
               <div class="export-dropdown-group">
-                <button type="button" class="btn btn-primary btn-sm btn-glow" id="btnExportSRT">
-                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
-                    <polyline points="7 10 12 15 17 10"></polyline>
-                    <line x1="12" y1="15" x2="12" y2="3"></line>
-                  </svg>
-                  <span>Exportar .SRT</span>
+                <button type="button" class="btn btn-primary btn-sm btn-glow" id="btnExportSRT" title="Exportar formato estándar SubRip (.SRT)">
+                  <span>📥 .SRT</span>
                 </button>
-                <button type="button" class="btn btn-secondary btn-sm" id="btnExportVTT">.VTT</button>
-                <button type="button" class="btn btn-secondary btn-sm" id="btnExportTXT">.TXT</button>
-                <button type="button" class="btn btn-ghost btn-sm" id="btnCopyClipboard" title="Copiar texto al portapapeles">
-                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <button type="button" class="btn btn-secondary btn-sm" id="btnExportASS" title="Exportar con estilo visual para DaVinci/CapCut/Premiere (.ASS)">.ASS</button>
+                <button type="button" class="btn btn-secondary btn-sm" id="btnExportVTT" title="Exportar WebVTT (.VTT)">.VTT</button>
+                <button type="button" class="btn btn-secondary btn-sm" id="btnExportTXT" title="Exportar guion en texto plano (.TXT)">.TXT</button>
+                <button type="button" class="btn btn-secondary btn-sm" id="btnExportJSON" title="Exportar datos estructurados (.JSON)">.JSON</button>
+                <button type="button" class="btn btn-accent-cyan btn-sm" id="btnBurnVideo" title="Incrustar/quemar subtítulos directamente en el vídeo (.MP4)">
+                  <span>🎬 Quemar MP4</span>
+                </button>
+                <button type="button" class="btn-icon" id="btnCopyClipboard" title="Copiar todo el texto al portapapeles">
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                     <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
                     <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
                   </svg>
@@ -321,24 +378,83 @@
             </div>
           </div>
 
-          <!-- TABLA / LISTA DE SUBTÍTULOS -->
-          <div class="subtitles-table-container">
-            <div class="subtitles-list" id="subtitlesList">
-              <!-- Estado vacío cuando aún no hay subtítulos -->
-              <div class="subtitles-empty" id="subtitlesEmpty">
-                <div class="empty-icon-wrap">
-                  <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
-                    <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
-                    <polyline points="14 2 14 8 20 8"></polyline>
-                    <line x1="16" y1="13" x2="8" y2="13"></line>
-                    <line x1="16" y1="17" x2="8" y2="17"></line>
-                    <polyline points="10 9 9 9 8 9"></polyline>
-                  </svg>
+          <!-- BARRA DESPLEGABLE DE BUSCAR Y REEMPLAZAR -->
+          <div class="replace-bar" id="replaceBar" style="display: none;">
+            <span class="tool-label">Reemplazar:</span>
+            <input type="text" id="replaceFindInput" placeholder="Texto a buscar..." class="custom-input input-sm">
+            <span class="time-arrow">➔</span>
+            <input type="text" id="replaceWithInput" placeholder="Reemplazar por..." class="custom-input input-sm">
+            <button type="button" class="btn btn-primary btn-sm" id="btnApplyReplaceAll">Reemplazar todo</button>
+            <button type="button" class="btn btn-ghost btn-sm" id="btnCloseReplace">Cerrar</button>
+          </div>
+
+          <!-- WORKSPACE DIVIDIDO: TABLA DE SUBTÍTULOS + SIMULADOR VISUAL -->
+          <div class="studio-workspace">
+            
+            <!-- COLUMNA IZQUIERDA: LISTA INTERACTIVA DE SUBTÍTULOS -->
+            <div class="subtitles-table-container">
+              <div class="subtitles-list" id="subtitlesList">
+                <div class="subtitles-empty" id="subtitlesEmpty">
+                  <div class="empty-icon-wrap">
+                    <svg width="42" height="42" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
+                      <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                      <polyline points="14 2 14 8 20 8"></polyline>
+                      <line x1="16" y1="13" x2="8" y2="13"></line>
+                      <line x1="16" y1="17" x2="8" y2="17"></line>
+                    </svg>
+                  </div>
+                  <h4>Tu estudio de subtítulos está listo</h4>
+                  <p>Carga un vídeo o audio, o haz clic en <b>"⚡ Probar muestra"</b> o <b>"Importar .SRT"</b> para empezar.</p>
                 </div>
-                <h4>Tu transcripción aparecerá aquí</h4>
-                <p>Carga un archivo de audio o vídeo y haz clic en "Generar Subtítulos" para comenzar.</p>
               </div>
             </div>
+
+            <!-- COLUMNA DERECHA: SIMULADOR DE VÍDEO & ESTILOS VIRALES EN VIVO -->
+            <aside class="live-preview-sidebar">
+              <div class="preview-header">
+                <span class="preview-title">📱 Vista Previa en Vivo</span>
+                <div class="aspect-toggle">
+                  <button type="button" class="aspect-btn active" id="btnAspect916" data-aspect="9:16">9:16 Shorts</button>
+                  <button type="button" class="aspect-btn" id="btnAspect169" data-aspect="16:9">16:9 YT</button>
+                </div>
+              </div>
+
+              <!-- Lienzo del Simulador -->
+              <div class="preview-stage-wrapper">
+                <div class="preview-stage aspect-9-16" id="previewStage">
+                  <video id="previewVideoElement" muted playsinline style="display: none;"></video>
+                  <div class="preview-backdrop-decor" id="previewBackdropDecor">
+                    <div class="preview-wave-circle"></div>
+                  </div>
+                  <div class="preview-subtitle-overlay pos-bottom style-hormozi" id="previewSubtitleOverlay">
+                    <span id="previewSubtitleText">¡Tus subtítulos se verán así en vivo!</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Selector de Plantillas Virales (Presets) -->
+              <div class="preview-controls">
+                <div class="control-row">
+                  <label class="tool-label">Plantilla Viral:</label>
+                  <select id="selectStylePreset" class="custom-select select-sm">
+                    <option value="hormozi" selected>🔥 Hormozi Neon (Amarillo/Negro)</option>
+                    <option value="mrbeast">⚡ MrBeast Impact (Blanco/Borde)</option>
+                    <option value="cyberpunk">💜 Cyberpunk Glow (Cian/Neón)</option>
+                    <option value="cinema">🎬 Cinema Classic (Caja oscura)</option>
+                  </select>
+                </div>
+
+                <div class="control-row">
+                  <label class="tool-label">Posición:</label>
+                  <div class="pos-buttons">
+                    <button type="button" class="btn-chip active" data-pos="bottom">Inferior</button>
+                    <button type="button" class="btn-chip" data-pos="center">Centro</button>
+                    <button type="button" class="btn-chip" data-pos="top">Superior</button>
+                  </div>
+                </div>
+              </div>
+            </aside>
+
           </div>
 
         </div>
@@ -349,13 +465,50 @@
 
     <!-- PIE DE PÁGINA -->
     <footer class="app-footer">
-      <span>PiSubtitles Studio • Motor de Transcripción Faster-Whisper</span>
+      <span>PiSubtitles Studio v2.0 • Motor Faster-Whisper</span>
       <span class="footer-sep">•</span>
-      <span id="detectedLangBadge">Auto</span>
+      <span>Idioma: <b id="detectedLangBadge">Auto</b></span>
       <span class="footer-sep">•</span>
-      <span>Código Abierto MIT</span>
+      <span id="autosaveStatusText">Autoguardado activo</span>
     </footer>
 
+  </div>
+
+  <!-- MODAL: GENERADOR DE CAPÍTULOS DE YOUTUBE -->
+  <div class="modal-backdrop" id="modalYoutube" style="display: none;">
+    <div class="modal-card glass-card">
+      <div class="modal-header">
+        <h3>📑 Capítulos y Resumen para YouTube</h3>
+        <button type="button" class="toast-close" id="btnCloseYoutubeModal">&times;</button>
+      </div>
+      <p class="modal-desc">Copia y pega estas marcas de tiempo directamente en la descripción de tu vídeo de YouTube:</p>
+      <textarea id="youtubeChaptersTextarea" class="modal-textarea" readonly></textarea>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary btn-sm" id="btnCopyYoutubeChapters">📋 Copiar Capítulos</button>
+        <button type="button" class="btn btn-ghost btn-sm" id="btnCloseYoutubeModal2">Cerrar</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL: ATAJOS DE TECLADO -->
+  <div class="modal-backdrop" id="modalShortcuts" style="display: none;">
+    <div class="modal-card glass-card">
+      <div class="modal-header">
+        <h3>⌨️ Atajos de Teclado Profesionales</h3>
+        <button type="button" class="toast-close" id="btnCloseShortcutsModal">&times;</button>
+      </div>
+      <div class="shortcuts-list">
+        <div class="shortcut-item"><kbd>Espacio</kbd> <span>Reproducir / Pausar audio o vídeo</span></div>
+        <div class="shortcut-item"><kbd>Alt + ⬅ / ➡</kbd> <span>Retroceder / Avanzar 2 segundos</span></div>
+        <div class="shortcut-item"><kbd>Ctrl + S</kbd> <span>Guardar .SRT instantáneamente junto al archivo original</span></div>
+        <div class="shortcut-item"><kbd>Ctrl + Z</kbd> <span>Deshacer última edición en subtítulos</span></div>
+        <div class="shortcut-item"><kbd>Ctrl + Y</kbd> <span>Rehacer edición en subtítulos</span></div>
+        <div class="shortcut-item"><kbd>Ctrl + F</kbd> <span>Buscar y reemplazar texto en subtítulos</span></div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary btn-sm" id="btnCloseShortcutsModal2">Entendido</button>
+      </div>
+    </div>
   </div>
 
   <!-- CONTENEDOR DE NOTIFICACIONES TOAST -->

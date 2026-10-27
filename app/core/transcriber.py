@@ -73,6 +73,8 @@ class TranscriberWorker:
         file_path: str,
         model_size: str = "small",
         language: Optional[str] = None,
+        task: str = "transcribe",          # 'transcribe' o 'translate'
+        initial_prompt: Optional[str] = None,
         segmentation_mode: str = "words",  # 'words' o 'sentence'
         max_words_per_line: int = 4,
         vad_filter: bool = True,
@@ -84,6 +86,8 @@ class TranscriberWorker:
         self.file_path = file_path
         self.model_size = model_size
         self.language = language if language and language != "auto" else None
+        self.task = task if task in ("transcribe", "translate") else "transcribe"
+        self.initial_prompt = initial_prompt.strip() if initial_prompt and initial_prompt.strip() else None
         self.segmentation_mode = segmentation_mode
         self.max_words_per_line = max(1, min(20, int(max_words_per_line)))
         self.vad_filter = vad_filter
@@ -142,6 +146,8 @@ class TranscriberWorker:
                 segments_gen, info = model.transcribe(
                     self.file_path,
                     language=self.language,
+                    task=self.task,
+                    initial_prompt=self.initial_prompt,
                     word_timestamps=need_words,
                     vad_filter=self.vad_filter,
                     beam_size=5
@@ -154,6 +160,8 @@ class TranscriberWorker:
                     segments_gen, info = model.transcribe(
                         self.file_path,
                         language=self.language,
+                        task=self.task,
+                        initial_prompt=self.initial_prompt,
                         word_timestamps=need_words,
                         vad_filter=self.vad_filter,
                         beam_size=5
